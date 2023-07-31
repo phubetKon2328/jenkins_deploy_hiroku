@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  heroku-cli:
+    image: my-heroku-cli-image
+    command: tail -f /dev/null
+    volumes:
+      - /path/to/your/host/machine:/host
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+
+volumes:
+  jenkins_home:

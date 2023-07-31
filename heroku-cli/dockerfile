@@ -1,0 +1,11 @@
+# Use an appropriate base image (e.g., Debian or Ubuntu).
+FROM debian:stable-slim
+
+# Install dependencies required for the Heroku CLI (curl and other dependencies)
+RUN apt-get update && apt-get install -y curl
+
+# Install the Heroku CLI
+RUN curl https://cli-assets.heroku.com/install.sh | sh
+
+# Set the working directory
+WORKDIR /usr/src/app

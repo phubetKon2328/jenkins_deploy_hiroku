@@ -1,0 +1,24 @@
+# Use the official Node.js image as the base image
+FROM node:14
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the package.json and package-lock.json (if using npm) or yarn.lock (if using yarn) to the container
+COPY package*.json ./
+
+# Install the application dependencies
+RUN npm install
+# If you're using yarn, use the following line instead:
+# RUN yarn install
+
+# Copy all the application files to the container
+COPY . .
+
+# Expose the port on which your Express application listens
+EXPOSE 3000
+
+# Start the application
+CMD ["node", "app.js"]
+# If you're using yarn, use the following line instead:
+# CMD ["yarn", "start"]
