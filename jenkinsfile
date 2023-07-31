@@ -17,7 +17,7 @@ pipeline {
                     sh 'heroku container:login'
                 }
 
-                // Push the Docker image to the Heroku container registry
+                // Push the Docker image to the Heroku container  registry
                 sh 'heroku container:push web -a hellonode-app'
 
                 // Release the container to make it live
