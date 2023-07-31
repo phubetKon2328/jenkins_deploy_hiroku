@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                // Build the Node.js Docker image
+                script {
+                    docker.build('your-node-app', '.')
+                }
+            }
+        }
+        stage('Deploy to Heroku') {
+            steps {
+                // Log in to Heroku using your Heroku API key or credentials
+                withCredentials([string(credentialsId: 'heroku-api-key', variable: 'HEROKU_API_KEY')]) {
+                    sh 'heroku container:login'
+                }
+
+                // Push the Docker image to the Heroku container registry
+                sh 'heroku container:push web -a hellonode-app'
+
+                // Release the container to make it live
+                sh 'heroku container:release web -a hellonode-app'
+            }
+        }
+    }
+}
